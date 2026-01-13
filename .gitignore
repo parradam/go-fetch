@@ -1,0 +1,13 @@
+# Binary
+/go-fetch
+
+# Go build artifacts
+*.exe
+*.test
+*.out
+
+# Dependencies
+vendor/
+
+# OS files
+.DS_Store
