@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 
 	"github.com/parradam/go-fetch/internal/models"
 )
@@ -26,12 +27,17 @@ func (c *Client) FetchIssues(owner, repo string) ([]*models.Issue, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer func() {
 		closeErr := resp.Body.Close()
 		if closeErr != nil {
-			fmt.Printf("Warning: failed to close response body: %v\n", closeErr)
+			fmt.Fprintf(os.Stderr, "Warning: failed to close response body: %v\n", closeErr)
 		}
 	}()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("GitHub API returned status %d for %s/%s", resp.StatusCode, owner, repo)
+	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
