@@ -9,22 +9,38 @@ A CLI tool to fetch GitHub issues and comments.
 ## Current Features
 
 - ✅ Fetch issues from GitHub repositories via REST API
+- ✅ CLI interface with argument parsing and validation
+- ✅ Built-in error handling
 - ✅ Convert GitHub data to internal domain models
 
 ## Planned Features
 
-- CLI interface with flags for repo selection
 - Export to Markdown/HTML
-- Support multiple repositories
+- Support multiple repositories via config file
 - Track sync state to avoid re-fetching
 - Fetch comments for issues
+- Pagination support for larger repositories
+
+## Usage
+
+Fetch issues from a GitHub repository:
+
+```bash
+go-fetch fetch golang/go
+```
+
+Show help:
+
+```bash
+go-fetch --help
+```
 
 ## Development
 
 Run:
 
 ```bash
-go run cmd/go-fetch/main.go
+go run cmd/go-fetch/main.go fetch golang/go
 ```
 
 Format code:
@@ -43,6 +59,12 @@ Build binary:
 
 ```bash
 go build -o go-fetch cmd/go-fetch/main.go
+```
+
+Run binary:
+
+```bash
+./go-fetch fetch golang/go
 ```
 
 ## Project structure
