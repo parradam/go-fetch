@@ -51,7 +51,7 @@ func printUsage() {
 	fmt.Println("Usage: go-fetch <command> <args>")
 	fmt.Println("")
 	fmt.Println("Commands:")
-	fmt.Println("  fetch <owner/repo>  Fetch issues from a GitHub repository")
+	fmt.Println("  fetch <owner/repo>  Fetch issues from a GitHub repository and save to Markdown")
 	fmt.Println("")
 	fmt.Println("Examples:")
 	fmt.Println("  go-fetch fetch golang/go")

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/parradam/go-fetch/internal/api/github"
+	"github.com/parradam/go-fetch/internal/output"
 )
 
 func Fetch(owner, repo string) error {
@@ -14,11 +15,15 @@ func Fetch(owner, repo string) error {
 		return fmt.Errorf("failed to fetch issues: %w", err)
 	}
 
-	fmt.Printf("Fetched %d issues:\n\n", len(issues))
+	formatter := &output.MarkdownFormatter{}
+	filename := fmt.Sprintf("%s-%s-issues.md", owner, repo)
 
-	for _, issue := range issues {
-		fmt.Printf("%d: %s (by %s)\n", issue.ID, issue.Title, issue.Author)
+	err = formatter.Write(issues, owner, repo, filename)
+	if err != nil {
+		return fmt.Errorf("failed to write markdown: %w", err)
 	}
+
+	fmt.Printf("Saved %d issues to %s\n", len(issues), filename)
 
 	return nil
 }

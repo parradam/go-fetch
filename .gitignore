@@ -11,3 +11,7 @@ vendor/
 
 # OS files
 .DS_Store
+
+# Markdown files - keep README.md
+*.md
+!README.md
